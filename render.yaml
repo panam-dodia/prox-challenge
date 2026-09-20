@@ -15,7 +15,6 @@ services:
   - type: web
     name: prox-vulcan-agent-web
     runtime: static
-    plan: free
     buildCommand: npm install && npm run build -w client
     staticPublishPath: client/dist
     envVars:
