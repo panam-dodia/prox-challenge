@@ -2,6 +2,9 @@
 
 A multimodal support agent for the [Vulcan OmniPro 220](https://www.harborfreight.com/omnipro-220-industrial-multiprocess-welder-with-120240v-input-57812.html) multiprocess welder, built on the **Claude Agent SDK**. It answers deep technical questions about the machine — duty cycles, polarity setup, weld diagnosis, wiring — and, where a picture beats a paragraph, it shows one: a real page from the manual, or a live interactive tool it builds on the spot.
 
+**Live demo:** https://prox-vulcan-agent-web.onrender.com
+(hosted on Render's free tier — the backend sleeps after 15 min idle, so the first message after a while may take 30–50s while it wakes up)
+
 ![Landing screen](docs/screenshots/landing.png)
 
 ## Quick start
