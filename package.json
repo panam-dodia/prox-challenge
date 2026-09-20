@@ -1,0 +1,25 @@
+{
+  "name": "prox-vulcan-agent",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n SERVER,CLIENT -c blue,green \"npm run dev -w server\" \"npm run dev -w client\"",
+    "extract": "tsx scripts/extract-manual.ts",
+    "build": "npm run build -w client && npm run build -w server",
+    "start": "node server/dist/index.js"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "@napi-rs/canvas": "^0.1.65",
+    "pdfjs-dist": "^4.9.155"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
