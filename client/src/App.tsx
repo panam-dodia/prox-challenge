@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { sendMessage } from "./api";
 import { apiUrl } from "./config";
+import { describeError } from "./errors";
 import { MessageBubble } from "./components/MessageBubble";
 import { CanvasPanel } from "./components/CanvasPanel";
 import { StarterPrompts } from "./components/StarterPrompts";
@@ -89,9 +90,7 @@ export default function App() {
         }
       }
     } catch (err) {
-      setMessages((prev) =>
-        prev.map((m) => (m.id === assistantId ? { ...m, error: err instanceof Error ? err.message : "Connection error" } : m))
-      );
+      setMessages((prev) => prev.map((m) => (m.id === assistantId ? { ...m, error: describeError(err) } : m)));
     } finally {
       setMessages((prev) => prev.map((m) => (m.id === assistantId ? { ...m, pending: false } : m)));
       setIsStreaming(false);
