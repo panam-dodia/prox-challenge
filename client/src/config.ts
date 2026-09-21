@@ -7,10 +7,8 @@
  * time to the backend's public URL.
  */
 const rawBase = (import.meta.env.VITE_API_BASE_URL ?? "").trim().replace(/\/$/, "");
-// Render's `fromService` blueprint reference returns a bare host
-// (e.g. "prox-vulcan-agent-api.onrender.com"), not a full URL — add the
-// scheme if it's missing. A value that already includes one (local
-// overrides, other hosts) passes through unchanged.
+// Tolerate a bare host (no scheme) too, in case VITE_API_BASE_URL is ever
+// set to just a domain rather than a full URL.
 export const API_BASE_URL = rawBase && !/^https?:\/\//.test(rawBase) ? `https://${rawBase}` : rawBase;
 
 export function apiUrl(path: string): string {

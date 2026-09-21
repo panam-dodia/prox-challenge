@@ -18,11 +18,16 @@ services:
     buildCommand: npm install && npm run build -w client
     staticPublishPath: client/dist
     envVars:
+      # NOTE: intentionally hardcoded, not a `fromService` reference.
+      # fromService's `host` property returns Render's *internal*
+      # hostname for private service-to-service networking — this value
+      # ends up in client-side JS running in the user's browser, which
+      # has no access to Render's internal network and can't resolve it
+      # (confirmed: caused net::ERR_NAME_NOT_RESOLVED in production).
+      # The public onrender.com domain is deterministic from the service
+      # name above and already verified reachable.
       - key: VITE_API_BASE_URL
-        fromService:
-          type: web
-          name: prox-vulcan-agent-api
-          property: host
+        value: https://prox-vulcan-agent-api.onrender.com
     routes:
       - type: rewrite
         source: /*
